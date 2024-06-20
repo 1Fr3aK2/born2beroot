@@ -21,8 +21,6 @@ disk_percent=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} {di>
 
 # CPU LOAD
 cpul=$(vmstat 1 2 | tail -1 | awk '{printf $15}')
-cpu_op=$(expr 100 - $cpul)
-cpu_fin=$(printf "%.1f" $cpu_op)
 
 # LAST BOOT
 lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
@@ -48,7 +46,7 @@ wall "  #Architecture: $arch
         #vCPU: $vcpu
         #Memory Usage: $ram_use/${ram_total}MB ($ram_percent%)
         #Disk Usage: $disk_use/${disk_total} ($disk_percent%)
-        #CPU load: $cpu_fin%
+        #CPU load: $cpul%
         #Last boot: $lb
         #LVM use: $lvmu
         #Connections TCP: $tcpc ESTABLISHED
